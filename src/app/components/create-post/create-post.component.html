@@ -1,0 +1,28 @@
+<div class="form-container">
+    <form #postFormControl="ngForm" (ngSubmit)="createPost()">
+      <h3>Create a Blog Post</h3>
+      <div class="form-group">
+        <label>Category</label>
+        <select type="text" class="text-input" name="category" required #categoryControl="ngModel"
+        [(ngModel)]="postForm.category" placeholder="Enter Post Title">
+        <option value="null" selected>Select a Category</option>
+        <option [value]="category.value" *ngFor="let category of categories"> {{ category.displayName }} </option>
+        </select>
+        <span class="text-danger" *ngIf="categoryControl.invalid && categoryControl.touched">Category field is required</span>
+      </div>
+      <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="text-input" required name="title" #titleControl="ngModel" [(ngModel)]="postForm.title" placeholder="Enter Post Title">
+        <span class="text-danger" *ngIf="titleControl.invalid && titleControl.touched">Title field is required</span>
+      </div>
+      <div class="form-group">
+        <label>Content</label>
+        <textarea rows="4" class="text-area-style" required #descriptionControl="ngModel" name="description" [(ngModel)]="postForm.description">
+        </textarea>
+        <span class="text-danger" *ngIf="descriptionControl.invalid && descriptionControl.touched">Description field is required</span>
+      </div>
+      <div class="form-group">
+        <button class="btn" type="submit" [disabled]="postFormControl.invalid">Create Post</button>
+      </div>
+    </form>
+</div>

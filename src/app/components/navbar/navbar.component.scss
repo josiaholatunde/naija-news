@@ -1,0 +1,46 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  h1 {
+    cursor: pointer;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+
+
+    li {
+      margin: 0 .6rem;
+      display: flex;
+      align-items: center;
+      position: relative;
+      a {
+        padding: .5rem;
+        color: black;
+        font-size: .9rem;
+      }
+      &:hover a {
+        color: #008751;
+      }
+      &:last-of-type {
+        border: 1px solid #008751;
+        border-radius: 4px;
+      }
+      &:last-of-type:hover, &:hover {
+        background: #008751;
+        border-radius: 4px;
+      }
+      &:last-of-type:hover a, &:hover a {
+        color: #fff;
+      }
+    }
+
+  }
+}
+
+.text-primary {
+  color: #008751;
+}
+

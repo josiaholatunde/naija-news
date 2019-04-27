@@ -1,0 +1,25 @@
+
+<div class="con" *ngFor="let post of posts">
+    <div class="grey" id="main{{post.id}}">
+        <div class="box-1">
+            <div class="img-con">
+                <img src="../../../assets/img/user.png" class="user-img">
+            </div>
+            <div class="title" title="{{post.title}}"> {{ post.title }} </div>
+        </div>
+        <div class="button" (click)="closeDetail(post.id)">
+          <div class="date">{{ post.dateCreated | date: 'medium' }}</div>
+          <i class="fa fa-sort-down fa-2x" [ngClass]="shouldRotate ? 'rotate': 'not-rotate'" ></i>
+        </div>
+      </div>
+      <div class="detail d-none" id="detail{{post.id}}" >
+        <p>{{  post.description }}
+        </p>
+          <div class="footer mt-1">
+            <div class="flex-right">
+              <button class="btn btn-primary" [routerLink]="['/posts/edit', post.id]">Edit</button>
+              <button class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>
+            </div>
+          </div>
+      </div>
+</div>

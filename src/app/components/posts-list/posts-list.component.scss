@@ -1,0 +1,101 @@
+.grey {
+  height: 3rem;
+  background: #fff;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 .5rem;
+  margin-top: 2.4rem;
+  box-shadow: 1px 1px 3px #ccc, -1px -1px 3px #ccc;
+
+}
+.box-1 {
+  display: flex;
+  align-items: center;
+}
+.con {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.img-con {
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-right: 1rem;
+}
+.user-img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+
+}
+.title {
+  width: 25rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+}
+.button {
+  align-self: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.date {
+  margin-right: .8rem;
+  font-size: .7rem;
+}
+.detail {
+  width: 50%;
+  min-height: 7rem;
+  box-shadow: 1px 1px 3px #ccc, 0px 0px 3px #ccc;
+  padding: 1rem;
+  p {
+    text-align: justify;
+  }
+}
+.footer {
+  width: 100%;
+  display: flex;
+}
+.flex-right {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+
+}
+.btn {
+  height: 2rem;
+  width: 3.2rem;
+  border: transparent;
+  border-radius: .2rem;
+  margin-right: 1rem;
+  color: #fff;
+  cursor: pointer;
+  &:active {
+    outline: none
+  }
+}
+.btn-danger {
+  background: #ff7a59;
+}
+.btn-primary {
+  background: #1292ee;
+}
+.d-none {
+  display: none;
+}
+.d-block {
+  display: block;
+}
+.rotate {
+  transform: rotateX(180deg);
+}
+
+.not-rotate {
+  transform: rotateX(0);
+}
+

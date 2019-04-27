@@ -1,0 +1,55 @@
+.form-container {
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+}
+form {
+  margin-top: 3rem;
+  width: 45%;
+  height: 80%;
+  padding: 2rem;
+  box-shadow: 1px 1px 2px #ccc;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: .7rem;
+  label {
+    font-size: 1rem;
+    padding: .3rem 0;
+    &::after {
+      content: "*";
+      color: red;
+      font-size: 1rem;
+      padding: 0 .2rem;
+    }
+  }
+  button {
+    width: 6rem;
+    height: 2.4rem;
+    padding: .5rem;
+   background: #008751;
+   color: #fff;
+   border: 1px solid #008751;
+   cursor: pointer;
+   margin-top: .6rem;
+  }
+}
+.text-input {
+  height: 2rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #008751;
+  padding: .3rem;
+}
+.text-area-style{
+  border: none;
+  outline: none;
+  padding: .3rem;
+  border-bottom: 1px solid #008751;
+}
+.text-danger {
+  color: red;
+  font-size: .8rem;
+  margin-top: .2rem;
+}
