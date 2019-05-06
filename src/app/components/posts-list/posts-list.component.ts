@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/post';
 import { AlertifyService } from 'src/app/services/alertify.service';
-import { FormMode } from 'src/app/models/FormMode';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-posts-list',
@@ -13,19 +14,27 @@ export class PostsListComponent implements OnInit {
   posts: Post[] = [];
   shouldShow: boolean;
   shouldRotate: any;
-  constructor(private postsService: PostService, private alertify: AlertifyService) { }
+  totalItems: number;
+  pageSize = 5;
+  pageNumber = 1;
+  loggedInUser: any;
+  constructor(private postsService: PostService, private authService: AuthService,
+     private alertify: AlertifyService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    this.getPosts();
+    this.spinner.show();
+    this.loggedInUser = this.authService.getLoggedInUser();
+    this.getPosts(this.pageNumber);
     this.postsService.getPostsListener().subscribe((posts: Post[]) => {
+      this.spinner.hide();
       this.posts = posts;
-      console.log('Posts', posts);
     });
 
   }
-  getPosts() {
-    this.postsService.getPostsDetail().subscribe(message => {
-      this.alertify.success(message);
+  getPosts(pageNumber?: number) {
+    this.postsService.getPostsDetail(pageNumber, this.pageSize).subscribe(res => {
+      this.alertify.success(res.message);
+      this.totalItems = res.totalItems;
     }, err => this.alertify.error(err));
   }
   closeDetail(id: string) {
@@ -40,11 +49,17 @@ export class PostsListComponent implements OnInit {
     }
   }
   deletePost(id: string) {
-    this.postsService
+    this.alertify.confirm('Are you sure you want to delete this post ?', () => {
+      this.postsService
         .deletePost(id)
         .subscribe((message) => {
           this.alertify.success(message);
         }, err => this.alertify.error(err));
+    });
+  }
+  pageChanged($event) {
+    const pageNumber = $event.page;
+    this.getPosts(pageNumber);
   }
 
 

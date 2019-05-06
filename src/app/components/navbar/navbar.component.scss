@@ -1,9 +1,13 @@
 nav {
   display: flex;
   justify-content: space-between;
+  background: #f5f5f5;
   padding: 1rem;
   h1 {
     cursor: pointer;
+    a {
+      color: black;
+    }
   }
   ul {
     list-style: none;
@@ -24,23 +28,33 @@ nav {
       &:hover a {
         color: #008751;
       }
-      &:last-of-type {
-        border: 1px solid #008751;
-        border-radius: 4px;
-      }
-      &:last-of-type:hover, &:hover {
-        background: #008751;
-        border-radius: 4px;
-      }
-      &:last-of-type:hover a, &:hover a {
+
+       &:hover a {
         color: #fff;
       }
     }
 
   }
 }
+li.signup {
+  border: 1px solid #008751;
+  border-radius: 4px;
+  cursor: pointer;
+}
+li.signup:hover, li:hover {
+  background: #008751;
+  border-radius: 4px;
+}
+.welcome:hover {
+  color: black;
+  background: none;
+}
 
 .text-primary {
   color: #008751;
 }
 
+.flex-nav {
+  display: flex;
+  align-items: center;
+}

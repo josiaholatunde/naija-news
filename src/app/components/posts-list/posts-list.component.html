@@ -1,5 +1,14 @@
 
 <div class="con" *ngFor="let post of posts">
+  <div class="spinner">
+      <ngx-spinner
+      bdColor="rgba(51,51,51,0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-spin">
+     <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+  </div>
     <div class="grey" id="main{{post.id}}">
         <div class="box-1">
             <div class="img-con">
@@ -13,13 +22,25 @@
         </div>
       </div>
       <div class="detail d-none" id="detail{{post.id}}" >
+        <div class="image-container">
+          <img [src]="post.imagePath" class="image-post">
+        </div>
         <p>{{  post.description }}
         </p>
-          <div class="footer mt-1">
-            <div class="flex-right">
+          <div class="footer mt-1" *ngIf="loggedInUser">
+            <div class="flex-right" *ngIf="post.creator === loggedInUser.id">
               <button class="btn btn-primary" [routerLink]="['/posts/edit', post.id]">Edit</button>
               <button class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>
             </div>
           </div>
       </div>
+</div>
+<div class="flex-center">
+  <pagination
+  [boundaryLinks]="true"
+  [itemsPerPage]="pageSize"
+  [totalItems]= "totalItems"
+  (pageChanged)="pageChanged($event)"
+         previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+  </pagination>
 </div>

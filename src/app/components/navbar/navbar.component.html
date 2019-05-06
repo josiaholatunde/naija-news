@@ -1,13 +1,15 @@
 <nav>
   <h1>
-    <i class="fas fa-bullhorn"></i>
-    <span class="text-primary">Naija</span>News
+    <a [routerLink]="['/']" >
+      <i class="fas fa-bullhorn"></i>
+      <span class="text-primary">Naija</span>News
+    </a>
   </h1>
   <ul>
-    <li>
-      <a [routerLink]="['/posts']">My Posts</a>
+    <li >
+      <a [routerLink]="['/posts']">Posts</a>
     </li>
-    <li>
+    <li *ngIf="isUserloggedIn">
       <a [routerLink]="['/posts/create']">New Post</a>
     </li>
     <li>
@@ -16,7 +18,11 @@
     <li><a href="">Business</a></li>
     <li><a href="">Culture</a></li>
     <li><a href="">Sport</a></li>
-    <li><a href="">Login</a></li>
-     <li><a href="">Signup</a></li>
+    <div class="flex-nav" *ngIf="!isUserloggedIn">
+        <li><a [routerLink]="['/auth']"  >Login</a></li>
+        <li class="signup"><a [routerLink]="['/auth']">Signup</a></li>
+    </div>
+    <li *ngIf="isUserloggedIn" class="welcome">Welcome {{loggedInUser.userName | titlecase}}</li>
+      <li *ngIf="isUserloggedIn" class="signup" (click)="logout()"><a >Logout</a></li>
   </ul>
 </nav>

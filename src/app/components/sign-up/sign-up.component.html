@@ -1,0 +1,89 @@
+<div class="container" id="container" [ngClass]="showRightPanel ? 'right-panel-active': ''" >
+  <div class="form-container sign-up-container">
+      <!-- Sign Up form code goes here -->
+      <form class="form" #registerFormControl="ngForm" (ngSubmit)="registerUser()">
+          <h1 class="my-1">Create your Account</h1>
+          <div class="social-container my-1">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <span>or use your email for registration</span>
+         <div class="form-group" >
+            <input type="text" name="userName" required placeholder="Name" #userNameControl="ngModel"
+            [(ngModel)]="userToRegister.userName" />
+            <span class="text-error" *ngIf="userNameControl.invalid && userNameControl.touched">
+              Username field is required*
+            </span>
+         </div>
+         <div class="form-group">
+            <input type="email" name="email" required email placeholder="Email" #emailControl="ngModel"
+            [(ngModel)]="userToRegister.email" />
+            <span class="text-error" *ngIf="emailControl.hasError('required') && emailControl.touched">
+              Email field is required*
+            </span>
+            <span class="text-error" *ngIf="emailControl.invalid && emailControl.touched">
+              Invalid Email*
+            </span>
+         </div>
+         <div class="form-group">
+          <input type="password" required name="password"
+          placeholder="Password" #passwordControl="ngModel"
+          [(ngModel)]="userToRegister.password" />
+          <span class="text-error" *ngIf="passwordControl.invalid && passwordControl.touched">
+            Password field is required</span>
+           <!--  <span class="text-error" *ngIf="userToRegister.password.length < 7 || userToRegister.password.length > 15">
+              Password should contain minimum of 7 and 15 characters
+            </span> -->
+         </div>
+          <button class="btn-primary" type="submit" [disabled]="registerFormControl.invalid">Sign Up</button>
+      </form>
+  </div>
+  <div class="form-container sign-in-container">
+      <!-- Sign In form code goes here -->
+      <form class="form"  #loginFormControl="ngForm" (ngSubmit)="loginUser()">
+        <h1 class="my-1">Sign in</h1>
+        <div class="social-container my-1">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <span>or use your account</span>
+        <div class="form-group" >
+            <input type="email" placeholder="Email" required name="email" #loginEmailControl="ngModel" [(ngModel)]="userToLogin.email"/>
+            <span class="text-error" *ngIf="loginEmailControl.invalid && loginEmailControl.touched">
+              Username field is required*
+            </span>
+         </div>
+        <div class="form-group">
+            <input type="password" placeholder="Password" required name="password" #loginPasswordControl="ngModel" [(ngModel)]="userToLogin.password" />
+            <span class="text-error" *ngIf="loginPasswordControl.invalid && loginPasswordControl.touched">
+              Password field is required</span>
+              <!-- <span class="text-error" *ngIf="userToLogin.password.length < 7 || userToLogin.password.value.length > 15">
+                Password should contain minimum of 7 and 15 characters
+              </span> -->
+           </div>
+        <a href="#" class="forgot">Forgot your password?</a>
+        <button class="btn-primary" type="submit" [disabled]="loginFormControl.invalid">Sign In</button>
+    </form>
+  </div>
+  <div class="overlay-container">
+      <!-- The overlay code goes here -->
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+            <h1>Welcome Back!</h1>
+            <p>
+                To keep connected with us please login with your personal info
+            </p>
+            <button class="ghost" id="signIn" (click)="removeRightPanel()">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+            <h1>Hello, Friend!</h1>
+            <p class="my-1">
+              Enter your personal details and start journey with us
+            </p>
+            <button class="ghost" id="signUp" (click)="addRightPanel()">Sign Up</button>
+        </div>
+    </div>
+  </div>
+</div>

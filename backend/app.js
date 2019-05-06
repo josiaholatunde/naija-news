@@ -1,8 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import postRoutes from  './routes/postsRoutes';
+import authRoutes from  './routes/authRoutes';
 import mongoose from 'mongoose';
 import keys from './config/keys';
+import path from 'path';
 
 mongoose.connect(keys.mongoDbURI, {useNewUrlParser: true}, (err) => {
   if (err) {
@@ -16,6 +18,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/images', express.static(path.join('backend/images')));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,6 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/posts', postRoutes);
+app.use('/api/auth', authRoutes);
 
 
 export default app;

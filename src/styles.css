@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:600|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
 @import "../node_modules/alertifyjs/build/css/alertify.min.css";
 * {
@@ -15,7 +15,7 @@ html, body {
   box-sizing: inherit;
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 a {
   text-decoration: none;

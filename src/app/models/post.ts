@@ -6,4 +6,7 @@ export interface Post {
   description: string;
   category: Category;
   dateCreated: Date;
+  imagePath: string;
+  creator: string;
 }
+

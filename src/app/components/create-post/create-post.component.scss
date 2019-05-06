@@ -1,5 +1,5 @@
 .form-container {
-  height: 40rem;
+ // height: 40rem;
   display: flex;
   justify-content: center;
 }
@@ -52,4 +52,25 @@ form {
   color: red;
   font-size: .8rem;
   margin-top: .2rem;
+}
+
+input[type=file] {
+  display: none;
+}
+.btn-danger {
+  background: #f04;
+  border: 1px solid #f04;
+  color: #fff;
+}
+.btn {
+  height: 2rem;
+  padding: .4rem;
+  width: 6rem;
+}
+.btn:active {
+  outline: none;
+}
+.img-preview {
+  height: 10rem;
+  width: 50%;
 }

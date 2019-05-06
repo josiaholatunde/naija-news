@@ -99,3 +99,18 @@
   transform: rotateX(0);
 }
 
+.image-container {
+  height: 25rem;
+  width: 100%;
+  margin-bottom: .5rem;
+  .image-post {
+    height: 100%;
+    width: 100%;
+    box-shadow: 1px 1px 3px black;
+  }
+}
+.flex-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

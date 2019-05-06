@@ -11,9 +11,22 @@ const postSchema = new Schema({
     type: String,
     required: true
   },
+  category: {
+    type: Number,
+    required: true
+  },
+  imagePath: {
+    type: String,
+    required: true
+  },
   dateCreated: {
     type: Date,
     default: new Date().toUTCString()
+  },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 });
 

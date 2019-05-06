@@ -1,28 +1,45 @@
 <div class="form-container">
-    <form #postFormControl="ngForm" (ngSubmit)="createPost()">
-      <h3>Create a Blog Post</h3>
+    <form [formGroup]="postFormGroup" (ngSubmit)="createPost()">
+      <h3>{{ formMode === 0 ? 'Create': 'Edit'}} a Blog Post</h3>
       <div class="form-group">
         <label>Category</label>
-        <select type="text" class="text-input" name="category" required #categoryControl="ngModel"
-        [(ngModel)]="postForm.category" placeholder="Enter Post Title">
+        <select type="text" class="text-input" formControlName="category"
+         placeholder="Enter Post Title">
         <option value="null" selected>Select a Category</option>
         <option [value]="category.value" *ngFor="let category of categories"> {{ category.displayName }} </option>
         </select>
-        <span class="text-danger" *ngIf="categoryControl.invalid && categoryControl.touched">Category field is required</span>
+        <span class="text-danger"
+          *ngIf="postFormGroup.get('category').invalid && postFormGroup.get('category').touched">
+          Category field is required
+        </span>
       </div>
       <div class="form-group">
         <label>Title</label>
-        <input type="text" class="text-input" required name="title" #titleControl="ngModel" [(ngModel)]="postForm.title" placeholder="Enter Post Title">
-        <span class="text-danger" *ngIf="titleControl.invalid && titleControl.touched">Title field is required</span>
+        <input type="text" class="text-input" formControlName="title" placeholder="Enter Post Title">
+        <span class="text-danger" *ngIf="postFormGroup.controls['title'].hasError('required') && postFormGroup.get('title').touched">
+          Title field is required
+        </span>
+        <span class="text-danger" *ngIf="postFormGroup.get('title').hasError('maxlength') && postFormGroup.get('title').touched">
+          Maximum length for title is 40 characters
+        </span>
+      </div>
+      <div class="form-group">
+        <input type="button" class="btn btn-danger" (click)="imageControl.click()" value="Upload Image">
+        <input type="file" #imageControl (change)="onImagePicked($event)">
+      </div>
+      <div class="form-group" *ngIf="imagePreview">
+        <img [src]="imagePreview" class="img-preview" [alt]="postFormGroup.value.title">
       </div>
       <div class="form-group">
         <label>Content</label>
-        <textarea rows="4" class="text-area-style" required #descriptionControl="ngModel" name="description" [(ngModel)]="postForm.description">
+        <textarea rows="4" class="text-area-style" formControlName="description">
         </textarea>
-        <span class="text-danger" *ngIf="descriptionControl.invalid && descriptionControl.touched">Description field is required</span>
+        <span class="text-danger" *ngIf="postFormGroup.get('description').invalid && postFormGroup.get('description').touched">
+          Description field is required
+        </span>
       </div>
       <div class="form-group">
-        <button class="btn" type="submit" [disabled]="postFormControl.invalid">Create Post</button>
+        <button class="btn" type="submit" [disabled]="postFormGroup.invalid">{{ formMode === 0 ? 'Create': 'Edit'}} Post</button>
       </div>
     </form>
 </div>
