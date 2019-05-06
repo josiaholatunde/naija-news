@@ -1,4 +1,10 @@
 # NaijaNews
+This is an ongoing project- A News blog built with Angular(Client Side), NodeJs(RestFUL API design) and MongoDB for persisting data. It covers various functionalities for allowing Admin users perform CRUD operations with posts/articles. JWT based authentication is used to validate requests to the api endpoints. The project also uses bcrypt for hashing passwords on the server. 
+Posts upload
+Post Image Upload,
+Role based authentication- Here only admin users who created posts can view posts and edit their posts while functionality(icons) to perform these functionality are hidden from other admin and users who can only read these posts.
+Global Error Handling was carried out with Angular's HttpInterceptor
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.0.
 
