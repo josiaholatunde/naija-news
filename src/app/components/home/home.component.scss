@@ -1,7 +1,24 @@
+
+.mt-1 { margin-top: .4rem;}
+.mt-2 { margin-top: .7rem;}
+.mt-3 { margin-top: 1rem;}
+.mt-4 { margin-top: 1.4rem;}
+
+
+.bd-1 { border: 1px solid #fff;}
+.bd-2 { border: 1px solid #fff;}
+.bd-3 { border: 1px solid #fff;}
+
 .container {
   padding-top: 1.5rem;
   width: 80%;
   margin: 0 auto;
+  @media only screen and (max-width: 79rem) {
+    width: 90%;
+  }
+  @media only screen and (max-width: 61rem) {
+    width: 94%;
+  }
   .trending {
     width: 100%;
     .trending-container {
@@ -9,6 +26,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      @media only screen and (max-width: 52rem) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
       div {
         display: flex;
         align-items: center;
@@ -17,12 +39,22 @@
         position: relative;
         display: flex;
         align-items: center;
+        @media only screen and (max-width: 61rem) {
+         width: 30%;
+        }
+        @media only screen and (max-width: 52rem) {
+          width: 100%;
+        }
+
         .search-input {
           height: 100%;
           flex: 3;
           border-radius: .7rem;
           padding: 1rem;
           border: 1px solid #f5f5f5;
+          @media only screen and (max-width: 52rem) {
+            margin-top: .6rem;
+          }
           &:focus {
             outline: none;
           }
@@ -30,14 +62,15 @@
         .fa-search {
           position: absolute;
           padding: .3rem;
-          right: 0;
+          right: 3%;
+         
         }
       }
     }
   }
 }
 .trend {
-  animation: slide 3s ease-in;
+  animation: slide 3s ease;
 }
 @keyframes slide {
   0% {
@@ -54,32 +87,48 @@
   margin-right: .3rem;
   text-transform: uppercase;
 }
+.category-p {
+  text-align: left;
+}
 .main-section {
   width: 100%;
   height: 30rem;
   margin-top: 1.4rem;
+  @media only screen and (max-width: 52rem) {
+    height: 85rem;
+   }
 
   div {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    @media only screen and (max-width: 52rem) {
+      display: flex;
+      flex-direction: column;
+     }
     .box-1 {
       position: relative;
       color: #fff;
+      @media only screen and (max-width: 52rem) {
+       height: 35rem;
+       }
       .img  {
         position: absolute;
       }
 
       .text-overlay {
         position: absolute;
-        bottom: 0%;
-        left: 0;
-       display: flex;
-        flex-direction: column; /*
-        justify-content: center;
-        align-items: center; */
-        text-align: left;
+        bottom: 5%;
+        left: 3%;
+        height: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .text-header {
+          font-size: 1.5rem;
+          width: 7rem;
+        }
       }
     }
     .box-2 {
@@ -87,12 +136,47 @@
       flex-direction: column;
       margin-left: .3rem;
     }
+    .box-3 {
+      justify-self: stretch;
+      height: 50%;
+      position: relative;
+
+      .text-overlay {
+        position: absolute;
+        bottom: 25%;
+        left: 3%;
+        height: 20%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        color: #fff;
+        @media only screen and (max-width: 52rem) {
+          bottom: 10%;
+        }
+      }
+      .text-header {
+        width: 17%;
+        font-size: 1.2rem;
+        @media only screen and (max-width: 52rem) {
+          width: 12%;
+          font-size: 1.5rem;
+        }
+      }
+    }
   }
 }
+
 
 .flex {
   display: flex;
   align-items: center;
+  margin-top: .3rem;
+  @media only screen and (max-width: 52rem) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+.flex:not:first-of-type {
   margin-top: .6rem;
 }
 .flex-center {
@@ -101,13 +185,47 @@
   justify-content: center;
   align-items: center;
 }
-.box-3 {
-  justify-self: stretch;
+
+.box-4, .box-5 {
+  position: relative;
+  @media only screen and (max-width: 52rem) {
+    width: 50%;
+  }
+  .text-overlay {
+    position: absolute;
+    bottom: 29%;
+    left: 3%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: #fff;
+    @media only screen and (max-width: 52rem) {
+      bottom: 7%;
+    }
+    h3 {
+      font-size: 1rem;
+    }
+  }
+  
+  .text-header {
+    width: 35%;
+    font-size: 1.1rem;
+    @media only screen and (max-width: 52rem) {
+      width: 15%;
+      font-size: 1.5rem;
+    }
+  }
 }
+
 
 .box-5 {
   margin-left: .3rem;
 
+
+}
+img {
+    object-fit: cover;
 
 }
 .img {
@@ -127,11 +245,14 @@
 }
 
 .entertainment {
-  height: 20rem;
   .header-nav {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    @media only screen and (max-width: 61rem) {
+      display: flex;
+      flex-direction: column;
+    }
     .left {
       padding: 1rem;
       box-shadow: 1px 1px 2px #ccc;
@@ -149,10 +270,16 @@
 }
 .flex-3 {
   flex: 0 0 60%;
+  @media only screen and (max-width: 65rem) {
+    flex: 0 0 65%;
+  }
 }
 .flex-4 {
   margin-left: 1.4rem;
   flex: 0 0 30%;
+  @media only screen and (max-width: 61rem) {
+    margin-left: 0;
+  }
 
 }
 .flex-stretch {
@@ -174,6 +301,8 @@
 .flex-col {
   display: flex;
   flex-direction: column;
+  height: 18rem;;
+
 }
 .title {
   font-weight: 500;
@@ -197,14 +326,17 @@ h5 {
 }
 .ent-text {
   width: 100%;
-  padding: 0 .6rem;
+  padding-left: .6rem;
+  @media only screen and (max-width: 61rem) {
+    margin-top: .4rem;
+  }
 }
 .text-mute {
   color: rgb(136, 136, 136);
   font-size: .9rem;
 }
 .img-md {
-  height: 85%;
+  height: 80%;
   width: 100%;
 }
 .mt-2 {

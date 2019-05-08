@@ -20,6 +20,7 @@ nav {
       display: flex;
       align-items: center;
       position: relative;
+      transition: all .3s ease;
       a {
         padding: .5rem;
         color: black;
