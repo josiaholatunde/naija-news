@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import postRoutes from  './routes/postsRoutes';
 import authRoutes from  './routes/authRoutes';
+import categoryRoutes from  './routes/categoryRoutes';
 import mongoose from 'mongoose';
 import keys from './config/keys';
 import path from 'path';
@@ -29,6 +30,7 @@ app.use((req, res, next) => {
 
 app.use('/api/posts', postRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/categories', categoryRoutes);
 
 
 export default app;

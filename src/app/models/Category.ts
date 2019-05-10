@@ -3,5 +3,6 @@ export enum Category {
   Sport,
   NewsStyle,
   Culture,
-  Entertainment
+  Entertainment,
+  Politics
 }

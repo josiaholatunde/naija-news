@@ -19,6 +19,8 @@ const userSchema = new Schema({
   }
 });
 
+
+
 mongoose.plugin(mongooseUniqueValidator);
 
 export default mongoose.model('User', userSchema);

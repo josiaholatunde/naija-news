@@ -6,7 +6,7 @@
         <select type="text" class="text-input" formControlName="category"
          placeholder="Enter Post Title">
         <option value="null" selected>Select a Category</option>
-        <option [value]="category.value" *ngFor="let category of categories"> {{ category.displayName }} </option>
+        <option [value]="category.id" *ngFor="let category of categories"> {{ category.title }} </option>
         </select>
         <span class="text-danger"
           *ngIf="postFormGroup.get('category').invalid && postFormGroup.get('category').touched">
@@ -20,7 +20,7 @@
           Title field is required
         </span>
         <span class="text-danger" *ngIf="postFormGroup.get('title').hasError('maxlength') && postFormGroup.get('title').touched">
-          Maximum length for title is 40 characters
+        Maximum length for title is 65 characters
         </span>
       </div>
       <div class="form-group">

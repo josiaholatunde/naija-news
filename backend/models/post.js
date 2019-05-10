@@ -12,8 +12,9 @@ const postSchema = new Schema({
     required: true
   },
   category: {
-    type: Number,
-    required: true
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Category'
   },
   imagePath: {
     type: String,

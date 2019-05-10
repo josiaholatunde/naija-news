@@ -6,6 +6,8 @@ import { AlertifyService } from 'src/app/services/alertify.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Category } from 'src/app/models/Category';
 import { FormMode } from 'src/app/models/FormMode';
+import { forkJoin } from 'rxjs';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-create-post',
@@ -13,13 +15,7 @@ import { FormMode } from 'src/app/models/FormMode';
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
-  categories = [
-    {displayName: 'Business', value: Category.Business},
-    {displayName: 'Culture', value: Category.Culture},
-    {displayName: 'Entertainment', value: Category.Entertainment},
-    {displayName: 'News Style', value: Category.NewsStyle},
-    {displayName: 'Sports', value: Category.Sport},
-  ];
+  categories = [];
   @ViewChild('postFormControl') postFormControl: NgForm;
   postFormGroup: FormGroup;
   formMode = FormMode.Create;
@@ -28,7 +24,7 @@ export class CreatePostComponent implements OnInit {
   postId: string;
 
   constructor(private postService: PostService, private alertify: AlertifyService, private router: Router,
-     private route: ActivatedRoute) { }
+     private route: ActivatedRoute, private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.initializeFormGroup();
@@ -36,11 +32,12 @@ export class CreatePostComponent implements OnInit {
       if (paramMap.has('postId')) {
         this.formMode = FormMode.Edit;
         const postId = paramMap.get('postId');
-        this.postService
-            .getPost(postId)
-            .subscribe(res => {
+        forkJoin( this.postService.getPost(postId),
+          this.categoryService.getCategories())
+          .subscribe(([res, res2]) => {
               const {id, title, description, category, dateCreated, imagePath} = res.post;
               this.postId = id;
+              this.categories = res2.categories;
               this.postFormGroup.setValue({
                 title,
                 description,
@@ -50,14 +47,19 @@ export class CreatePostComponent implements OnInit {
               this.alertify.success(res.message);
             }, err => this.alertify.error('Error in fetching Post'));
       } else {
+        this.categoryService
+        .getCategories()
+        .subscribe(res => this.categories = res.categories);
+
         this.formMode = FormMode.Create;
       }
+      console.log(this.categories);
     });
 
   }
   initializeFormGroup() {
     this.postFormGroup = new FormGroup({
-      title: new FormControl(null, {validators: [Validators.required, Validators.maxLength(48)]}),
+      title: new FormControl(null, {validators: [Validators.required, Validators.maxLength(65)]}),
       description: new FormControl(null, {validators: [Validators.required]}),
       category: new FormControl(null, {validators: [Validators.required]}),
       image: new FormControl(null, {validators: [Validators.required]})

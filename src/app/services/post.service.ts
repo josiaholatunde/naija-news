@@ -35,6 +35,11 @@ export class PostService {
     return this.http.
                   get<{message: string, post: Post}>(`${this.baseUrl}/${id}`);
   }
+
+  getLatestPost(catId) {
+      return this.http.
+                  get<{message: string, post: Post}>(`${this.baseUrl}/${catId}/latest`);
+  }
   getPostsDetail(pageNumber, pageSize) {
     const params = new HttpParams();
     if (pageNumber && pageSize) {
@@ -50,7 +55,25 @@ export class PostService {
           this.postsObservable.next([...res.posts]);
           return {
             message: res.message,
-            totalItems: res.totalItems
+            totalItems: res.totalItems,
+            posts: res.posts
+          };
+        })
+      );
+  }
+  getPostsPerCategory(catId) {
+
+    return this.http.get<{
+      message: string, posts: Post[], totalItems: number
+    }>(`${this.baseUrl}/all?categoryId=${catId}`, {observe: 'body'})
+      .pipe(
+        map((res) => {
+          this.posts = [...res.posts];
+          this.postsObservable.next([...res.posts]);
+          return {
+            message: res.message,
+            totalItems: res.totalItems,
+            posts: res.posts
           };
         })
       );

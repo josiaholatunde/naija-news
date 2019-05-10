@@ -1,5 +1,5 @@
 import Post from '../models/post';
-import post from '../models/post';
+import Category from '../models/category';
 
 class PostController {
 
@@ -26,41 +26,62 @@ class PostController {
       })
      });
   }
+
   static async getPostsDetail(req, res) {
-    let { pageSize, pageNumber } = req.query;
+    let { pageSize, pageNumber, categoryId } = req.query;
     if (typeof(pageSize) === 'undefined' && typeof(pageNumber) === 'undefined') {
       pageSize = 10;
       pageNumber = 1;
     }
     try {
-      console.log('ddd', typeof(pageNumber), typeof(pageSize));
       let postData;
       const count = await Post.countDocuments();
       console.log('count', count);
-       Post.find({}, (err, posts) => {
-        return res.status(200).json({
-          message: 'Successfully fetched posts',
-          posts:   posts.map(post => {
-              const { _id, title, description, category, dateCreated, imagePath, creator } = post;
-              return {
-                id: _id,
-                title,
-                description,
-                category,
-                dateCreated,
-                imagePath,
-                creator
-              }
-          }),
-          totalItems: count
-        });
-      }).skip((+pageNumber - 1) * +pageSize).limit(+pageSize);
+      if (!categoryId)  {
+        Post.find({}, (err, posts) => {
+          return res.status(200).json({
+            message: 'Successfully fetched posts',
+            posts:   posts.map(post => {
+                const { _id, title, description, category, dateCreated, imagePath, creator } = post;
+                return {
+                  id: _id,
+                  title,
+                  description,
+                  category,
+                  dateCreated,
+                  imagePath,
+                  creator
+                }
+            }),
+            totalItems: count
+          });
+        }).skip((+pageNumber - 1) * +pageSize).limit(+pageSize);
+      } else {
+        pageSize = 3;
+        Post.find({category: categoryId}, (err, posts) => {
+          return res.status(200).json({
+            message: 'Successfully fetched posts',
+            posts:   posts.map(post => {
+                const { _id, title, category, dateCreated, imagePath, creator } = post;
+                return {
+                  id: _id,
+                  title,
+                  category,
+                  dateCreated,
+                  imagePath,
+                  creator
+                }
+            })
+          });
+        }).limit(+pageSize);
+      }
     } catch (error) {
       return res.status(500).json({
         error
       });
     }
   }
+
 
   static getPost(req, res) {
     Post.findById(req.params.id, (err, post) => {
@@ -89,6 +110,24 @@ class PostController {
     });
   }
 
+  static getLatestPost(req, res) {
+
+    Post.findOne({ category: req.params.catId }, (err, post) => {
+      if (err) {
+        return res.status(500).json({
+          message: 'Error occurred while fetching post'
+        });
+      }
+      if (!post) {
+        return res.status(404).json({
+          message: 'Post was not found'
+        })
+      }
+      return res.status(200).json({
+        post
+      });
+    }).sort({ dateCreated: -1 });
+  }
 
   static async addPost(req, res) {
     const {title, description, category} = req.body;
@@ -103,6 +142,10 @@ class PostController {
     });
     try {
       const savedPost = await post.save();
+      /* Category.findOne({category}, (err, category) => {
+        category.posts.push
+      }) */
+      console.log(savedPost);
       return res.status(201).json({
         message: 'Successfully created Post',
         post: {
@@ -110,7 +153,7 @@ class PostController {
           title,
           description,
           category,
-          imagePath,
+          imagePath: savedPost.imagePath,
           creator: savedPost.creator
         }
       });

@@ -18,6 +18,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ErrorInterceptor } from './services/error-interceptor.service';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { AuthGuard } from './guards/auth-guard';
+import { CategoryService } from './services/category.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AuthGuard } from './guards/auth-guard';
     NgxSpinnerService,
     ErrorInterceptor,
     AuthInterceptor,
-    AuthGuard
+    AuthGuard,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

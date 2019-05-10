@@ -1,11 +1,12 @@
 <nav>
   <h1>
+    <div class="hamburger" (click)="showNav()"><i class="fa fa-bars"></i></div>
     <a [routerLink]="['/']" >
       <i class="fas fa-bullhorn"></i>
       <span class="text-primary">Naija</span>News
     </a>
   </h1>
-  <ul>
+  <ul id="nav">
     <li >
       <a [routerLink]="['/posts']">Posts</a>
     </li>

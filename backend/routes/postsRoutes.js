@@ -9,6 +9,9 @@ const router = express.Router();
 router.get('', PostController.getPosts);
 router.get('/all', PostController.getPostsDetail);
 router.get('/:id', PostController.getPost);
+
+router.get('/:catId/latest', PostController.getLatestPost);
+
 router.put('/:id', checkAuth, extractFile, PostController.editPost);
 router.post('', checkAuth, extractFile, PostController.addPost);
 router.delete('/:id', checkAuth, PostController.deletePost);

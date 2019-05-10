@@ -7,10 +7,10 @@
   padding: 0;
   box-sizing: border-box;
 }
-*::after,
+/* *::after,
 *::before {
   box-sizing: inherit;
-}
+} */
 html, body {
   box-sizing: inherit;
 }

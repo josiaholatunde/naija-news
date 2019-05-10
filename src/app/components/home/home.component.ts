@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/services/category.service';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -6,29 +8,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  categories: any[];
+  mainPosts = [];
+  latestPosts = [];
 
-  trends = [
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    'Another ipsum dolor sit amet consectetur adipisicing elit.',
-    'Agan ipsum dolor sit amet consectetur adipisicing elit.',
-    'Maga ipsum dolor sit amet consectetur adipisicing elit.',
-  ];
-  constructor() { }
+  constructor(private categoryService: CategoryService,
+    private postService: PostService) { }
 
   ngOnInit() {
-    let i = 0;
-    setInterval(() => {
-      setTimeout(() => {
-        document.getElementById('trend').classList.remove('trend');
-      }, 3000);
-      if (i === this.trends.length - 1) {
-        i = 0;
+    this.categoryService.getCategories().subscribe((res) => {
+      this.categories = res.categories;
+      this.categories.forEach(cat => {
+        cat.posts = [];
+        this.postService.getPostsPerCategory(cat.id).subscribe((res2) => {
+            cat.posts = res2.posts;
+        });
+      });
+      console.log('Categories', this.categories[1]);
+
+      for (let i = 0; i < 4; i++) {
+        this.postService.getLatestPost(this.categories[i].id)
+        .subscribe(result => {
+          this.mainPosts.push(result.post);
+          this.latestPosts.push(result.post);
+          console.log('Posts Main', this.mainPosts);
+        });
+        if (i === 3) {
+          this.latestPosts.splice(0, 1);
+        }
       }
-      document.getElementById('trend').innerHTML = this.trends[i];
-      document.getElementById('trend').classList.add('trend');
-      i++;
-      console.log(i);
-    }, 2000);
+    });
+
   }
 
 }

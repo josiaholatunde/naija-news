@@ -13,57 +13,54 @@
 </div>
 <main class="main-section">
   <div class="main-section-container">
-      <div class="box-1">
-        <img src="../../../assets/img/img1.jpg" class="img">
+      <div class="box-1" *ngIf="mainPosts.length > 0">
+        <img [src]="mainPosts[0]?.imagePath || '../../../assets/img/img1.jpg'" class="img">
         <div class="text-overlay">
           <div class="text-header bd-1">Business</div>
-          <h3 class="mt-1">Lorem ipsum, dolor sit amet consectetur adipisicing
-             elit. Quaerat, et!
+          <h3 class="bolden" class="mt-1">{{ mainPosts[0]?.title }}
           </h3>
-          <div class="text mt-1">Ogunboyejo Olatunde- Feb 18</div>
+          <div class="text mt-1">Ogunboyejo Olatunde- {{ mainPosts[0]?.dateCreated | date: 'mediumDate'}}</div>
         </div>
       </div>
       <div class="box-2">
         <div class="box-3">
-            <img src="../../../assets/img/img2.jpg" class="img-2">
+            <img [src]=" mainPosts[1]?.imagePath || '../../../assets/img/img2.jpg'" class="img-2">
             <div class="text-overlay">
               <div class="text-header bd-1">Culture</div>
-              <h3 class="mt-1">Lorem ipsum, dolor sit amet consectetur adipisicing
-                 elit. Quaerat, et!
+              <h3 class="mt-1">{{ mainPosts[1]?.title }}
               </h3>
-              <div class="text mt-1">Ogunboyejo Olatunde- Feb 18</div>
+              <div class="text mt-1">Ogunboyejo Olatunde- {{ mainPosts[1]?.dateCreated | date: 'mediumDate'}}</div>
             </div>
         </div>
         <div class="flex">
           <div class="box-4 flex-center">
-              <img src="../../../assets/img/img4.jpg" class="img">
+              <img [src]="mainPosts[2]?.imagePath || '../../../assets/img/img4.jpg'" class="img">
               <div class="text-overlay">
                 <div class="text-header bd-1">Life Style</div>
-                <h3 class="mt-1">Lorem ipsum, dolor sit amet consectetur adipisicing
-                   elit. Quaerat, et!
+                <h3 class="mt-1">{{ mainPosts[2]?.title }}
                 </h3>
-                <div class="text">Ogunboyejo Olatunde- Feb 18</div>
+                <div class="text">Ogunboyejo Olatunde- {{ mainPosts[2]?.dateCreated | date: 'mediumDate'}}</div>
               </div>
           </div>
           <div class="box-5 flex-center">
-              <img src="../../../assets/img/img5.jpg" class="img">
+              <img [src]="mainPosts[3]?.imagePath || '../../../assets/img/img5.jpg'" class="img">
               <div class="text-overlay">
                 <div class="text-header bd-1">Sports</div>
-                <h3 class="mt-1">Lorem ipsum, dolor sit amet consectetur adipisicing
-                   elit. Quaerat, et!
+                <h3 class="mt-1">{{ mainPosts[3]?.title }}
+
                 </h3>
-                <div class="text">Ogunboyejo Olatunde- Feb 18</div>
+                <div class="text">Ogunboyejo Olatunde- {{ mainPosts[3]?.dateCreated | date: 'mediumDate'}}</div>
               </div>
           </div>
         </div>
       </div>
   </div>
 </main>
-<section class="entertainment mt-3">
+<section class="entertainment mt-3" *ngFor="let category of categories">
   <div class="header-nav">
       <div class="flex-3">
           <div class="left flex-sb">
-              <div>Entertainment</div>
+              <div>{{ category?.title }}</div>
               <ul>
                 <li>Celebrity</li>
                 <li>Movies</li>
@@ -72,34 +69,18 @@
               </ul>
           </div>
           <div class="flex-con">
-              <div class="flex-col">
-                <img src="../../../assets/img/img5.jpg" class="img-md">
-                <div class="title mt-1">Lorem ipsum dolor sit amet consectetur
-                   adipisicing.
-                   <div class="text-mute">Music- Feb 18</div>
-
+              <div class="flex-col" >
+                <img [src]="category.posts[0]?.imagePath" class="img-md">
+                <div class="title mt-1"> {{ category.posts[0]?.title }}
+                   <div class="text-mute">Music- {{category.posts[0]?.dateCreated | date: 'mediumDate'}}</div>
                   </div>
               </div>
               <div class="mx-1">
-                <div class="flex">
-                    <img src="../../../assets/img/img5.jpg" class="img-sm">
+                <div class="flex" *ngFor="let post of category.posts">
+                    <img [src]="post?.imagePath" class="img-sm">
                     <div class="ent-text">
-                      <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-                      <div class="text-mute">Music- Feb 18</div>
-                    </div>
-                </div>
-                <div class="flex">
-                    <img src="../../../assets/img/img5.jpg" class="img-sm">
-                    <div class="ent-text">
-                      <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-                      <div class="text-mute">Music- Feb 18</div>
-                    </div>
-                </div>
-                <div class="flex">
-                    <img src="../../../assets/img/img5.jpg" class="img-sm">
-                    <div class="ent-text">
-                      <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-                      <div class="text-mute">Music- Feb 18</div>
+                      <h5> {{ post.title }} </h5>
+                      <div class="text-mute">Music- {{post.dateCreated | date: 'mediumDate'}}</div>
                     </div>
                 </div>
               </div>
@@ -119,64 +100,6 @@
 </section>
 
 
-<section class="entertainment mt-2">
-  <div class="header-nav">
-      <div class="flex-3">
-          <div class="left flex-sb">
-              <div>Business</div>
-              <ul>
-                <li>Celebrity</li>
-                <li>Movies</li>
-                <li>Music</li>
-                <li>Games</li>
-              </ul>
-          </div>
-          <div class="flex-con">
-              <div class="flex-col">
-                <img src="../../../assets/img/img5.jpg" class="img-md">
-                <div class="title mt-1">Lorem ipsum dolor sit amet consectetur
-                   adipisicing.
-                   <div class="text-mute">Music- Feb 18</div>
-
-                  </div>
-              </div>
-              <div class="mx-1">
-                <div class="flex">
-                    <img src="../../../assets/img/img5.jpg" class="img-sm">
-                    <div class="ent-text">
-                      <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-                      <div class="text-mute">Music- Feb 18</div>
-                    </div>
-                </div>
-                <div class="flex">
-                    <img src="../../../assets/img/img5.jpg" class="img-sm">
-                    <div class="ent-text">
-                      <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-                      <div class="text-mute">Music- Feb 18</div>
-                    </div>
-                </div>
-                <div class="flex">
-                    <img src="../../../assets/img/img5.jpg" class="img-sm">
-                    <div class="ent-text">
-                      <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-                      <div class="text-mute">Music- Feb 18</div>
-                    </div>
-                </div>
-              </div>
-          </div>
-      </div>
-      <div class="flex-4">
-          <div class="left">Most Popular</div>
-          <div class="ent-text mt-2">
-              <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-              <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-              <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-              <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-              <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-          </div>
-      </div>
-  </div>
-</section>
 
 <section class="entertainment mt-2">
     <div class="header-nav">
@@ -184,28 +107,14 @@
             <div class="left flex-sb">
                 <div>Latest Articles</div>
             </div>
-            <div class="con">
-                <div class="box">
+            <div class="con" *ngIf="latestPosts.length > 0">
+                <div class="box" *ngFor="let post of latestPosts">
                     <div class="img-con">
-                        <img src="../../../assets/img/img5.jpg" class="img-lg">
+                        <img [src]="post.imagePath || '../../../assets/img/img5.jpg'" class="img-lg">
                     </div>
-                    <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
+                    <h5>{{ post.title }}</h5>
                     <div class="text-mute">By- Ogunboyejo Olatunde</div>
-                    <div class="text-mute">Music- Feb 18</div>
-                </div>
-                <div class="box box-center">
-                    <div class="img-con">
-                        <img src="../../../assets/img/img5.jpg" class="img-lg">
-                    </div>                    <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-                    <div class="text-mute">By- Ogunboyejo Olatunde</div>
-                    <div class="text-mute">Music- Feb 18</div>
-                </div>
-                <div class="box">
-                    <div class="img-con">
-                        <img src="../../../assets/img/img4.jpg" class="img-lg">
-                    </div>                    <h5>Lorem, ipsum dolor sit amet consectetur adipisicing.</h5>
-                    <div class="text-mute">By- Ogunboyejo Olatunde</div>
-                    <div class="text-mute">Music- Feb 18</div>
+                    <div class="text-mute">Music- {{post.dateCreated | date: 'mediumDate'}}</div>
                 </div>
             </div>
           </div>
